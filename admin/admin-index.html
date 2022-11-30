@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BOOTSTRAP -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet" />
+
+    <link rel="shortcut icon" href="/imgs/crest.png" type="image/x-icon" />
+    <title>ADMINISTRATION</title>
+
+    <!-- STYLE -->
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
+      td {
+        vertical-align: middle !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>ADMINISTRATION ZONE</h1>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form" id="add-user-btn">Thêm người dùng</button>
+      <div class="modal fade" id="form" tabindex="-1" aria-labelledby="form" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="form"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="#" onsubmit="addUser()" id="form-modal">
+              <div class="modal-body">
+                <input type="text" class="form-control mb-2" id="username" placeholder="Tài khoản" required />
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="fullname"
+                  placeholder="Họ tên"
+                  required
+                  pattern="[^\d][\w\s]+"
+                  title="Họ tên chỉ chứa các chữ cái" />
+                <input
+                  type="password"
+                  class="form-control mb-2"
+                  id="password"
+                  placeholder="Password"
+                  required=""
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)[\w\S]{6,8}$"
+                  title="Mật khẩu có độ dài từ 6 đến 8 kí tự, chứa ít nhất 01 chữ cái in hoa, 01 chữ cái in thường, 01 ký tự đặc biệt" />
+                <input type="email" class="form-control mb-2" id="email" placeholder="E-Mail" required />
+                <input type="text" class="form-control mb-2" id="photo" placeholder="Hình ảnh" required />
+                <select class="custom-select mb-2" id="group" required>
+                  <option value="GV">Giáo viên</option>
+                  <option value="HV">Học viên</option>
+                </select>
+                <input type="text" class="form-control mb-2" id="language" placeholder="Ngôn ngữ" required />
+                <input type="text" class="form-control mb-2" id="description" placeholder="Mô tả" required maxlength="60" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" id="update-submit">Cập nhật</button>
+                <button type="submit" class="btn btn-primary" id="add-submit">Thêm</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tài khoản</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ngôn ngữ</th>
+            <th scope="col">Loại người dùng</th>
+            <th scope="col">Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tbody class="user-table">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"
+      integrity="sha512-OdkysyYNjK4CZHgB+dkw9xQp66hZ9TLqmS2vXaBrftfyJeduVhyy1cOfoxiKdi4/bfgpco6REu6Rb+V2oVIRWg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script src="scripts/services/user-service.js"></script>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>

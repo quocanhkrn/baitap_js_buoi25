@@ -1,0 +1,830 @@
+// RESET CSS
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// MAIN CSS
+$primary-color: #b61984;
+$primary-text-color: #191919;
+
+@mixin flex($flexDirection: row, $justifyContent: center, $alignItems: center) {
+  display: flex;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 70%;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 1300px) {
+    max-width: 90%;
+  }
+}
+
+a {
+  color: $primary-text-color;
+
+  &:hover {
+    text-decoration: none;
+    color: $primary-color;
+  }
+}
+
+// HEADER
+#header-lg {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+
+  .nav {
+    @include flex($justifyContent: space-between);
+
+    &__links {
+      @include flex($justifyContent: space-between);
+      gap: 2rem;
+
+      ul {
+        &:first-of-type {
+          gap: 1rem;
+        }
+      }
+    }
+
+    &__phone {
+      @include flex($justifyContent: space-between);
+      gap: 0.5rem;
+      height: 2.5rem;
+      padding: 0 1.5rem;
+      position: relative;
+      color: white;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: rgba($color: #ffffff, $alpha: 0);
+        border: 1.25rem solid $primary-color;
+        border-radius: 100px;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        color: $primary-color;
+
+        &::after {
+          border: 0.1rem solid $primary-color;
+        }
+      }
+    }
+
+    &__social {
+      @include flex($justifyContent: space-between);
+      gap: 0.5rem;
+    }
+
+    ul {
+      @include flex($justifyContent: space-between);
+
+      li {
+        &:nth-of-type(2) {
+          @include flex($justifyContent: space-between);
+          justify-content: center;
+          position: relative;
+
+          &::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            position: absolute;
+            top: 30px;
+            background-color: $primary-color;
+            border-radius: 50px;
+          }
+        }
+      }
+    }
+
+    a {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+    }
+  }
+
+  &.scrolled {
+    background-color: white;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+#header-sm {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+
+  .nav {
+    @include flex($flexDirection: row, $alignItems: start);
+
+    &__sidebar {
+      @include flex($flexDirection: column, $justifyContent: flex-start);
+      flex: 0 0 auto;
+      width: 350px;
+      height: 100vh;
+      margin-left: -350px;
+      background-color: white;
+      box-shadow: 2px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s;
+
+      .nav {
+        &__links {
+          @include flex($flexDirection: column, $justifyContent: flex-start);
+          font-family: "Montserrat", sans-serif;
+
+          ul {
+            @include flex($flexDirection: column, $justifyContent: flex-start, $alignItems: end);
+            gap: 30px;
+            margin: 50px 0;
+
+            i {
+              margin-left: 20px;
+              font-size: 0.8rem;
+            }
+          }
+        }
+
+        &__phone {
+          @include flex($justifyContent: space-between);
+          gap: 0.5rem;
+          height: 2.5rem;
+          margin-bottom: 10px;
+          padding: 0 1.5rem;
+          position: relative;
+          z-index: 1;
+          color: white;
+
+          &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: rgba($color: #ffffff, $alpha: 0);
+            border: 1.25rem solid $primary-color;
+            border-radius: 100px;
+            transition: all 0.2s;
+          }
+
+          &:hover {
+            color: $primary-color;
+
+            &::after {
+              border: 0.1rem solid $primary-color;
+            }
+          }
+        }
+      }
+
+      &.sidebar-on {
+        margin-left: 0;
+      }
+    }
+
+    &__header {
+      @include flex($justifyContent: flex-start);
+      flex-grow: 1;
+      padding: 0 5vw;
+      background-color: white;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+
+      button {
+        background-color: rgba($color: #000000, $alpha: 0);
+        border: none;
+        font-size: 2rem;
+      }
+
+      .nav__brand {
+        height: 4rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &.sidebar-on {
+        .nav__brand {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+// BANNER
+.banner {
+  height: 100vh;
+  padding-top: 120px;
+  position: relative;
+  z-index: -1;
+
+  .container {
+    @include flex($justifyContent: space-between);
+  }
+
+  &__title {
+    width: 50%;
+    font-family: "Montserrat", sans-serif;
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $primary-color;
+    }
+
+    .title {
+      font-size: 4rem;
+      font-weight: 700;
+      color: $primary-text-color;
+    }
+  }
+
+  &__img {
+    width: 50%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    background-image: url(/imgs/yellow_top_wave_01.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    background-image: url(/imgs/Violet_top_left_wave.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  @media only screen and (max-width: 992px) {
+    .container {
+      @include flex($flexDirection: column);
+    }
+
+    &__title,
+    &__img {
+      width: 100%;
+    }
+  }
+}
+
+// TEACHERS
+.teachers {
+  background-color: #dcd1f0;
+  position: relative;
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__info-card {
+    @include flex($flexDirection: column, $justifyContent: flex-start);
+    gap: 1.5rem;
+    align-self: stretch;
+    overflow: hidden;
+    padding-bottom: 1.5rem;
+    background-color: white;
+    border-radius: 10px;
+
+    &:hover {
+      box-shadow: 0px 20px 30px -10px rgba(0, 0, 0, 0.2);
+
+      .teachers__avt img {
+        transform: scale(110%);
+      }
+    }
+  }
+
+  &__avt {
+    overflow: hidden;
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s;
+    }
+  }
+
+  &__nationality {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: $primary-color;
+  }
+
+  &__name {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  &__description {
+    padding: 0 20px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    bottom: 0;
+    background-image: url(/imgs/Wave_White_bottom_right_shape_01.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  @media only screen and (max-width: 992px) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+// FORM
+.form {
+  position: relative;
+  padding-top: 100px;
+
+  .container {
+    @include flex($justifyContent: space-between);
+  }
+
+  &__img {
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 50%;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 30px 30px -10px rgba(0, 0, 0, 0.3);
+
+    * {
+      display: block;
+      width: 100%;
+    }
+
+    .title {
+      grid-column: 1 / span 2;
+      font-family: "Montserrat", sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .input__course,
+    .input__message {
+      grid-column: 1 / span 2;
+    }
+
+    input,
+    select {
+      padding: 1rem 3rem;
+      border: 1px solid rgba($color: $primary-text-color, $alpha: 0.1);
+      border-radius: 50px;
+
+      &:focus-visible {
+        border: 1px solid rgba($color: $primary-text-color, $alpha: 0.5);
+        outline: none;
+      }
+
+      &::placeholder {
+        color: rgba($color: $primary-text-color, $alpha: 0.5);
+      }
+    }
+
+    select {
+      width: 100%;
+      color: rgba($color: $primary-text-color, $alpha: 0.5);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem 3rem;
+      border: 1px solid rgba($color: $primary-text-color, $alpha: 0.1);
+      border-radius: 30px;
+
+      &:focus-visible {
+        border: 1px solid rgba($color: $primary-text-color, $alpha: 0.5);
+        outline: none;
+      }
+
+      &::placeholder {
+        color: rgba($color: $primary-text-color, $alpha: 0.5);
+      }
+    }
+
+    .input {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 1.5rem;
+        transform: translateY(-50%);
+        color: $primary-color;
+      }
+
+      &__message {
+        i {
+          top: 1.5rem;
+        }
+      }
+    }
+
+    button {
+      height: 2.5rem;
+      width: fit-content;
+      padding: 0 3rem;
+      position: relative;
+      z-index: 2;
+      background-color: rgba($color: #000000, $alpha: 0);
+      border: none;
+      color: white;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: rgba($color: #ffffff, $alpha: 0);
+        border: 1.25rem solid $primary-color;
+        border-radius: 100px;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        color: $primary-color;
+
+        &::after {
+          border: 0.1rem solid $primary-color;
+        }
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: -5;
+    background-image: url(/imgs/accent_bottom_wave_01.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  @media only screen and (max-width: 992px) {
+    .container {
+      @include flex($flexDirection: column, $justifyContent: center);
+      gap: 2rem;
+    }
+
+    &__img,
+    &__input {
+      width: 100%;
+    }
+  }
+}
+
+// FOOTER
+.footer {
+  padding: 200px 0;
+  position: relative;
+  background-color: #aa017e;
+  line-height: 3;
+  color: white;
+
+  h1 {
+    margin-bottom: 30px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p i {
+    margin-right: 10px;
+  }
+
+  ul li {
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 70px;
+      height: 2px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: rgba($color: #000000, $alpha: 0.1);
+      border-radius: 50px;
+    }
+
+    a {
+      &:hover {
+        color: rgba($color: white, $alpha: 0.5);
+      }
+    }
+  }
+
+  a {
+    color: white;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 2;
+  }
+
+  &__contact {
+    .social {
+      @include flex($justifyContent: flex-start);
+      gap: 20px;
+
+      a {
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
+
+  &__newsletter {
+    input {
+      width: 100%;
+      height: 3rem;
+      margin-bottom: 10px;
+      background-color: rgba($color: white, $alpha: 0);
+      border: 1px solid rgba($color: white, $alpha: 0.2);
+      border-radius: 100px;
+      text-align: center;
+      color: white;
+
+      &::placeholder {
+        color: white;
+      }
+
+      &:focus-visible {
+        border: 1px solid rgba($color: white, $alpha: 1);
+        outline: none;
+      }
+    }
+
+    button {
+      height: 3rem;
+      width: 100%;
+      padding: 0 3rem;
+      position: relative;
+      z-index: 2;
+      background-color: rgba($color: #000000, $alpha: 0);
+      border: none;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      color: $primary-text-color;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: rgba($color: #ffffff, $alpha: 0);
+        border: 1.5rem solid white;
+        border-radius: 100px;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        color: white;
+
+        &::after {
+          border: 0.1rem solid white;
+        }
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background-image: url(/imgs/footer_background.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
+}
+
+// RESPONSIVE
+@media only screen and (max-width: 1200px) {
+  #header-lg {
+    display: none;
+  }
+
+  #header-sm {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  #header-lg {
+    display: block;
+  }
+
+  #header-sm {
+    display: none;
+  }
+}
